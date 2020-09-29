@@ -88,5 +88,40 @@ public class ListaSe {
         }
 
     }
-
+    public Perro encontrarxPosicion(int posicion){
+        if(cabeza!=null){
+            Nodo temp= cabeza;
+            int cont=1;
+            while (posicion!=cont) {                
+                temp = temp.getSiguiente();
+                cont++;
+            }
+            return temp.getDato();
+        }
+        return null;
+    }
+    
+    public void borrarPorPerroId(int id) {
+        if (cabeza != null) {
+            if (cabeza.getDato().getNumero() == id){
+                Nodo temp = cabeza.getSiguiente();
+                cabeza = temp;
+            } else{
+                Nodo reciente, temp1;
+                reciente = cabeza;
+                temp1 = cabeza.getSiguiente();
+                
+                while (temp1 != null && temp1.getDato().getNumero() != id){
+                    reciente = reciente.getSiguiente();
+                    temp1 = temp1.getSiguiente();
+                }
+                if (temp1.getDato().getNumero() == id){
+                    reciente.setSiguiente(temp1.getSiguiente());
+                    temp1 = reciente.getSiguiente();
+                }
+            }
+        }else {
+                    System.out.println("No hay dato para eliminar");
+                    }
+    }
 }

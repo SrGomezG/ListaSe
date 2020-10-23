@@ -15,6 +15,30 @@ public class ListaDE {
     
     public ListaDE() {
     }
+
+    public NodoDE getCabeza() {
+        return cabeza;
+    }
+
+    public void setCabeza(NodoDE cabeza) {
+        this.cabeza = cabeza;
+    }
+    
+    public int contarNodosDE(){
+        if(cabeza != null) {
+            NodoDE temp = cabeza;
+            int cont = 1;
+            while (temp.getSiguiente() !=null) {
+                temp = temp.getSiguiente();
+                cont++;
+            }
+            return cont;
+        }else {
+            
+        }
+        return 0;
+    }
+    
     
     public void adicionarNodo(Perro dato) {
         if (cabeza != null) {
@@ -80,6 +104,28 @@ public class ListaDE {
                         temp.getSiguiente().setAnterior(temp.getAnterior());
                     }
                 }
+            }
+        }
+    }
+    
+    public void invertir(){
+        if (cabeza != null){
+            ListaDE listaTemporal = new ListaDE();
+            NodoDE temp = cabeza;
+            while (temp != null) {
+                listaTemporal.adicionarAlInicio(temp.getDato());
+                temp = temp.getSiguiente();
+                temp = temp.getAnterior();
+            }
+            cabeza = listaTemporal.getCabeza();
+        }
+    }
+    
+    public void intercambiarExtremos(){
+        if (cabeza != null){
+            NodoDE temp = cabeza;
+            while (temp.getSiguiente()!= null && temp.getAnterior()!=null){
+                temp = temp.getAnterior();
             }
         }
     }

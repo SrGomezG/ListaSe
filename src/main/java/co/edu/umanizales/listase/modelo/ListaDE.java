@@ -29,7 +29,7 @@ public class ListaDE {
             NodoDE temp = cabeza;
             int cont = 1;
             while (temp.getSiguiente() != null) {
-                temp = temp.getSiguiente();
+                temp = temp.getSiguiente().getSiguiente();
                 cont++;
             }
             return cont;
@@ -39,22 +39,22 @@ public class ListaDE {
         return 0;
     }
 
-    public void adicionarNodo(Perro dato) {
+    public void adicionarNodoDE(Perro dato) {
         if (cabeza != null) {
-            NodoDE temp = cabeza;
-
-            while (temp.getSiguiente() != null) {
-                temp = temp.getSiguiente();
-            }
-
-            temp.setSiguiente(new NodoDE(dato));
-            temp.getSiguiente().setAnterior(temp);
-        } else {
             cabeza = new NodoDE(dato);
+            
+        } else {
+            NodoDE temp = cabeza;
+           while (temp.getSiguiente().getAnterior() != null) {
+                temp = temp.getSiguiente().getAnterior();
+           }
+           
+           temp.setSiguiente(new NodoDE(dato));
+           temp.setAnterior(new NodoDE(dato));
         }
     }
 
-    public void adicionarAlInicio(Perro dato) {
+    public void adicionarAlInicioDE(Perro dato) {
         if (cabeza != null) {
             NodoDE temp = new NodoDE(dato);
             temp.setSiguiente(cabeza);
@@ -65,7 +65,7 @@ public class ListaDE {
         }
     }
 
-    public void eliminarPorPosicion(int posicion) {
+    public void eliminarPorPosicionDE(int posicion) {
         if (cabeza != null) {
             if (posicion == 1) {
                 cabeza = cabeza.getSiguiente();
@@ -87,7 +87,7 @@ public class ListaDE {
         }
     }
 
-    public void eliminar(Perro dato) {
+    public void eliminarDE(Perro dato) {
         if (cabeza != null) {
             NodoDE temp = cabeza;
             while (temp.getDato().getNumero() != dato.getNumero()) {
@@ -107,12 +107,12 @@ public class ListaDE {
         }
     }
 
-    public void invertir() {
+    public void invertirDE() {
         if (cabeza != null) {
             ListaDE listaTemporal = new ListaDE();
             NodoDE temp = cabeza;
             while (temp != null) {
-                listaTemporal.adicionarAlInicio(temp.getDato());
+                listaTemporal.adicionarAlInicioDE(temp.getDato());
                 temp = temp.getSiguiente();
                 temp = temp.getAnterior();
             }
@@ -120,7 +120,7 @@ public class ListaDE {
         }
     }
 
-    public void intercambiarExtremos() {
+    public void intercambiarExtremosDE() {
         if (cabeza != null) {
             NodoDE temp = cabeza;
             while (temp.getSiguiente() != null && temp.getAnterior() != null) {
@@ -146,7 +146,7 @@ public class ListaDE {
         return null;
     }
 
-    public void borrarPerroPorId(int id) {
+    public void borrarPerroPorIdDE(int id) {
         if (cabeza != null) {
             if (cabeza.getDato().getNumero() == id) {
                 NodoDE temp = cabeza.getSiguiente().getAnterior();

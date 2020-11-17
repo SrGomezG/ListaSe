@@ -13,19 +13,17 @@ import java.io.Serializable;
  */
 public class Nino implements Serializable {
     private String nombre;
-    private String sexo;
+    private boolean sexo;
     private byte id;
-    private byte oportunidades;
     
     public Nino(){
         
     }
 
-    public Nino(String nombre, String sexo, byte id, byte oportunidades) {
+    public Nino(String nombre, boolean sexo, byte id) {
         this.nombre = nombre;
         this.sexo = sexo;
         this.id = id;
-        this.oportunidades = oportunidades;
     }
 
     public String getNombre() {
@@ -36,11 +34,11 @@ public class Nino implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getSexo() {
+    public boolean isSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
 
@@ -52,18 +50,10 @@ public class Nino implements Serializable {
         this.id = id;
     }
 
-    public byte getOportunidades() {
-        return oportunidades;
-    }
-
-    public void setOportunidades(byte oportunidades) {
-        this.oportunidades = oportunidades;
-    }
-
     @Override
     public String toString() {
-        return "Nino{" + "nombre=" + nombre + ", sexo=" + sexo + ", id=" + id + ", oportunidades=" + oportunidades + '}';
+        return "Nino{" + "nombre=" + nombre + ", sexo=" + sexo + ", id=" + id + '}';
     }
 
-    
+   
 }

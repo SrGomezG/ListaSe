@@ -10,22 +10,22 @@ package co.edu.umanizales.listase.modelo;
  * @author tsuyo
  */
 public class ListaDETT {
-    
+
     private NodoDETT cabeza;
     private int totalNinos = 0;
     //otros metodos
 
     public ListaDETT() {
     }
-    
+
     public NodoDETT getCabeza() {
         return cabeza;
     }
-    
+
     public void setCabeza(NodoDETT cabeza) {
         this.cabeza = cabeza;
     }
-    
+
     public void adicionarNodoCircular(Nino dato) {
         if (cabeza == null) {
             cabeza = new NodoDETT(dato);
@@ -40,7 +40,7 @@ public class ListaDETT {
         }
         totalNinos++;
     }
-    
+
 //    public void adicionarNodo(Nino dato) {
 //        if (cabeza != null) {
 //            NodoDETT temp = cabeza;
@@ -56,7 +56,6 @@ public class ListaDETT {
 //            cabeza = new NodoDETT(dato);
 //        }
 //    }
-
     public int contarNodos() //cabeza
     {
         if (cabeza != null) {
@@ -72,7 +71,7 @@ public class ListaDETT {
             return 0;
         }
     }
-    
+
     public void adicionarAlInicioDETT(Nino dato) {
         if (cabeza != null) {
             NodoDETT temp = new NodoDETT(dato);
@@ -83,7 +82,7 @@ public class ListaDETT {
             cabeza = new NodoDETT(dato);
         }
     }
-    
+
     public void eliminarPorPosicion(int posicion) {
         if (cabeza != null) {
             if (posicion == 1) {
@@ -105,7 +104,7 @@ public class ListaDETT {
             }
         }
     }
-    
+
     public void eliminar(Nino dato) {
         if (cabeza != null) {
             NodoDETT temp = cabeza;
@@ -121,13 +120,53 @@ public class ListaDETT {
                 temp.getAnterior().setSiguiente(temp.getSiguiente());
                 if (temp.getSiguiente() != null) {
                     temp.getSiguiente().setAnterior(temp.getAnterior());
-                    
+
                 }
             }
         }
-        
+ }
+
+    public void eliminarPorGeneroNino(Nino dato) {
+        if (cabeza != null) {
+            NodoDETT temp = cabeza;
+            while (temp.getDato().isSexo() != dato.isSexo()) {
+                temp = temp.getSiguiente();
+            }
+            if (temp == cabeza) {
+                cabeza = cabeza.getSiguiente();
+                if (cabeza != null) {
+                    cabeza.setAnterior(null);
+                }
+            } else {
+                temp.getAnterior().setSiguiente(temp.getSiguiente());
+                if (temp.getSiguiente() != null) {
+                    temp.getSiguiente().setAnterior(temp.getAnterior());
+
+                }
+            }
+        }
     }
-    
+    public void eliminarPorGeneroNina(Nino dato) {
+        if (cabeza != null) {
+            NodoDETT temp = cabeza;
+            while (temp.getDato().isSexo() != dato.isSexo()) {
+                temp = temp.getSiguiente();
+            }
+            if (temp == cabeza) {
+                cabeza = cabeza.getSiguiente();
+                if (cabeza != null) {
+                    cabeza.setAnterior(null);
+                }
+            } else {
+                temp.getAnterior().setSiguiente(temp.getSiguiente());
+                if (temp.getSiguiente() != null) {
+                    temp.getSiguiente().setAnterior(temp.getAnterior());
+
+                }
+            }
+        }
+    }
+
     public Nino encontrarxPosicionDETT(int posicion) {
         if (cabeza != null) {
             NodoDETT temp = cabeza;
@@ -140,32 +179,7 @@ public class ListaDETT {
         }
         return null;
     }
-    
-    public void invertir() {
-        if (cabeza != null) {
-            ListaDETT listaTemporal = new ListaDETT();
-            NodoDETT temp = cabeza;
-            while (temp != null) {
-                listaTemporal.adicionarAlInicioDETT(temp.getDato());
-                temp = temp.getSiguiente();
-            }
-            cabeza = listaTemporal.getCabeza();
-        }
-    }
-    
-    public void intercambiarExtremos() {
-        
-        if (cabeza != null) {
-            NodoDETT temp = cabeza;
-            while (temp.getSiguiente() != null) {
-                temp = temp.getSiguiente();
-            }
-            Nino ninotemp = cabeza.getDato();
-            cabeza.setDato(temp.getDato());
-            temp.setDato(ninotemp);
-        }
-    }
-    
+
     public void mostrarLista() {
         NodoDETT recorrer = cabeza;
         while (recorrer != null) {
@@ -173,45 +187,44 @@ public class ListaDETT {
             recorrer = recorrer.getSiguiente();
         }
     }
-    
-    public void filtrarMasculino() {
-        if (cabeza != null) {
-            ListaDETT listatemp = new ListaDETT();
-            NodoDETT temp = cabeza;
-            
-            while (temp != null) {
-                if (temp.getDato().getSexo() == "M") {
-                    listatemp.adicionarAlInicioDETT(temp.getDato());
-                } else {
-                    listatemp.adicionarNodoCircular(temp.getDato());
-                }
-                temp = temp.getSiguiente();
-            }
-            cabeza = listatemp.getCabeza();
-        } else {
-            System.out.println("No hay niños para filtrar");
-        }
-    }
-    
-    public void filtrarFemenino() {
-        if (cabeza != null) {
-            ListaDETT listatemp = new ListaDETT();
-            NodoDETT temp = cabeza;
-            
-            while (temp != null) {
-                if (temp.getDato().getSexo() == "H") {
-                    listatemp.adicionarAlInicioDETT(temp.getDato());
-                } else {
-                    listatemp.adicionarNodoCircular(temp.getDato());
-                }
-                temp = temp.getSiguiente();
-            }
-            cabeza = listatemp.getCabeza();
-        } else {
-            System.out.println("No hay niños para Filtrar");
-        }
-    }
-    
+
+//    public void filtrarMasculino() {
+//        if (cabeza != null) {
+//            ListaDETT listatemp = new ListaDETT();
+//            NodoDETT temp = cabeza;
+//
+//            while (temp != null) {
+//                if (temp.getDato().getSexo() == "M") {
+//                    listatemp.adicionarAlInicioDETT(temp.getDato());
+//                } else {
+//                    listatemp.adicionarNodoCircular(temp.getDato());
+//                }
+//                temp = temp.getSiguiente();
+//            }
+//            cabeza = listatemp.getCabeza();
+//        } else {
+//            System.out.println("No hay niños para filtrar");
+//        }
+//    }
+//
+//    public void filtrarFemenino() {
+//        if (cabeza != null) {
+//            ListaDETT listatemp = new ListaDETT();
+//            NodoDETT temp = cabeza;
+//
+//            while (temp != null) {
+//                if (temp.getDato().getSexo == "H") {
+//                    listatemp.adicionarAlInicioDETT(temp.getDato());
+//                } else {
+//                    listatemp.adicionarNodoCircular(temp.getDato());
+//                }
+//                temp = temp.getSiguiente();
+//            }
+//            cabeza = listatemp.getCabeza();
+//        } else {
+//            System.out.println("No hay niños para Filtrar");
+//        }
+//    }
     public void adicionarNodoPorPosicion(int posicionIngreso, Nino dato) {
         if (cabeza != null) {
             int cont = 1;
@@ -224,7 +237,7 @@ public class ListaDETT {
                     cont++;
                 }
                 if (temp.getSiguiente() == null) {
-                    
+
                     adicionarNodoCircular(dato);
                 } else {
                     NodoDETT temp1 = temp.getSiguiente();
@@ -236,53 +249,72 @@ public class ListaDETT {
             }
         } else {
             adicionarNodoCircular(dato);
-            
+
         }
 
     }
 
-    public void intercambiarPosiciones(int ninoUno, int ninoDos) {
+    public boolean adicionarNodoAlFinalNino(Nino dato) {
+        if (dato == null) {
+            return false;
+        }
+        if (cabeza == null) {
+            cabeza.setDato(dato);
+            return true;
+        }
+        NodoDETT temp = obtenerUltimo();
+        NodoDETT newNodoDETT = new NodoDETT(dato);
+        newNodoDETT.setDato(dato);
+        newNodoDETT.setAnterior(temp);
+        newNodoDETT.setSiguiente(newNodoDETT);
+        return true;
+
+    }
+
+    public NodoDETT obtenerUltimo() {
+
+        NodoDETT temp = cabeza;
+        while (temp.getSiguiente() != null) {
+            temp = temp.getSiguiente();
+        }
+        return temp;
+    }
+
+    public int tamanio() {
+        NodoDETT temp = null;
+        int cont = 0;
         if (cabeza != null) {
-            Nino temporalUno = encontrarxPosicionDETT(ninoUno);
-            Nino temporalDos = encontrarxPosicionDETT(ninoDos);
-            NodoDETT temp = cabeza;
-            int cont = 1;
-            if (ninoUno < ninoDos) {
-                while (temp.getSiguiente() != null && cont != ninoUno) {
-                    cont++;
-                    temp = temp.getSiguiente();
-                }
-                if (cont == ninoUno) {
-                    temp.setDato(temporalDos);
-                }
-                cont = 1;
-                temp = cabeza;
-                while (temp.getSiguiente() != null && cont != ninoDos) {
-                    cont++;
-                    temp = temp.getSiguiente();
-                }
-                if (cont == ninoDos) {
-                    temp.setDato(temporalUno);
-                }
-            } else if (ninoUno > ninoDos) {
-                while (temp.getSiguiente() != null && cont != ninoDos) {
-                    cont++;
-                    temp = temp.getSiguiente();
-                }
-                if (cont == ninoDos) {
-                    temp.setDato(temporalUno);
-                }
-                cont = 1;
-                temp = cabeza;
-                while (temp.getSiguiente() != null && cont != ninoUno) {
-                    cont++;
-                    temp = temp.getSiguiente();
-                }
-                if (cont == ninoUno) {
-                    temp.setDato(temporalDos);
-                }
+            temp = this.cabeza;
+            while (temp.getSiguiente() != null) {
+                cont++;
+                temp = temp.getSiguiente();
+
             }
         }
+        return cont;
     }
-    
+
+    public int obtenerPosicionNino(short codigo) throws NinoExcepcion {
+        if (cabeza != null) {
+            int cont = 1;
+            NodoDETT temp = cabeza;
+            while (temp != null) {
+                if (temp.getDato().getId() == codigo) {
+                    return cont;
+                }
+                temp = temp.getSiguiente();
+                cont++;
+            }
+            throw new NinoExcepcion("El id no existe ");
+
+        }
+        throw new NinoExcepcion("La lista de niños está vacía");
+    }
+
+    public class NinoExcepcion extends Exception {
+
+        public NinoExcepcion(String message) {
+            super(message);
+        }
+    }
 }

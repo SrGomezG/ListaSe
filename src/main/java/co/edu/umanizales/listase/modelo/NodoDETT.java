@@ -12,11 +12,24 @@ package co.edu.umanizales.listase.modelo;
 public class NodoDETT {
     
     private Nino dato;
+    private NinoOportunidad dato2;
     private NodoDETT siguiente;
     private NodoDETT anterior;
 
+    public NodoDETT(NinoOportunidad dato2) {
+        this.dato2 = dato2;
+    }
+
     public NodoDETT(Nino dato) {
         this.dato = dato;
+    }
+
+    public NinoOportunidad getDato2() {
+        return dato2;
+    }
+
+    public void setDato2(NinoOportunidad dato2) {
+        this.dato2 = dato2;
     }
 
     public Nino getDato() {

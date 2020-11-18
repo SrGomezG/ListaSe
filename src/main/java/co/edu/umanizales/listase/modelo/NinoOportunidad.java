@@ -25,7 +25,7 @@ public class NinoOportunidad extends Nino implements Serializable {
         this.dato2 = dato2;
     }
 
-    public NinoOportunidad(byte oportunidades, Nino dato2, String nombre, boolean sexo, byte id) {
+    public NinoOportunidad(byte oportunidades, Nino dato2, String nombre, String sexo, byte id) {
         super(nombre, sexo, id);
         this.oportunidades = oportunidades;
         this.dato2 = dato2;
@@ -52,5 +52,5 @@ public class NinoOportunidad extends Nino implements Serializable {
         return "NinoOportunidad{" + "oportunidades=" + oportunidades + ", dato2=" + dato2 + '}';
     }
 
-  
+   
 }

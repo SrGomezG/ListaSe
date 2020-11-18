@@ -126,10 +126,10 @@ public class ListaDETT {
         }
  }
 
-    public void eliminarPorGeneroNino(Nino dato) {
+    public String eliminarNino(String sexo) {
         if (cabeza != null) {
             NodoDETT temp = cabeza;
-            while (temp.getDato().isSexo() != dato.isSexo()) {
+            while (temp.getDato().getSexo() == "Femenino") {
                 temp = temp.getSiguiente();
             }
             if (temp == cabeza) {
@@ -141,15 +141,17 @@ public class ListaDETT {
                 temp.getAnterior().setSiguiente(temp.getSiguiente());
                 if (temp.getSiguiente() != null) {
                     temp.getSiguiente().setAnterior(temp.getAnterior());
-
                 }
+               
             }
+            
         }
+        return null;
     }
-    public void eliminarPorGeneroNina(Nino dato) {
+    public String eliminarNina(String sexo) {
         if (cabeza != null) {
             NodoDETT temp = cabeza;
-            while (temp.getDato().isSexo() != dato.isSexo()) {
+            while (temp.getDato().getSexo() == "Masculino") {
                 temp = temp.getSiguiente();
             }
             if (temp == cabeza) {
@@ -161,10 +163,12 @@ public class ListaDETT {
                 temp.getAnterior().setSiguiente(temp.getSiguiente());
                 if (temp.getSiguiente() != null) {
                     temp.getSiguiente().setAnterior(temp.getAnterior());
-
                 }
+                
             }
+            
         }
+        return null;
     }
 
     public Nino encontrarxPosicionDETT(int posicion) {
@@ -194,7 +198,7 @@ public class ListaDETT {
 //            NodoDETT temp = cabeza;
 //
 //            while (temp != null) {
-//                if (temp.getDato().getSexo() == "M") {
+//                if (temp.getDato().getSexo() == "Masculino") {
 //                    listatemp.adicionarAlInicioDETT(temp.getDato());
 //                } else {
 //                    listatemp.adicionarNodoCircular(temp.getDato());
@@ -309,6 +313,10 @@ public class ListaDETT {
 
         }
         throw new NinoExcepcion("La lista de niños está vacía");
+    }
+
+    public void adicionarNodoPorPosicion(NinoOportunidad ninoReingresar, int posicion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public class NinoExcepcion extends Exception {

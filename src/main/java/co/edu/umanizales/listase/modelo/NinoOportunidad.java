@@ -11,46 +11,34 @@ import java.io.Serializable;
  *
  * @author tsuyo
  */
-public class NinoOportunidad extends Nino implements Serializable {
+public class NinoOportunidad implements Serializable {
 
-    private byte oportunidades;
-    private Nino dato2;
+    private Nino nino;
+    private int oportunidad;
 
     public NinoOportunidad() {
 
     }
 
-    public NinoOportunidad(byte oportunidades, Nino dato2) {
-        this.oportunidades = oportunidades;
-        this.dato2 = dato2;
+    public NinoOportunidad(Nino nino, int oportunidad) {
+        this.nino = nino;
+        this.oportunidad = oportunidad;
     }
 
-    public NinoOportunidad(byte oportunidades, Nino dato2, String nombre, String sexo, byte id) {
-        super(nombre, sexo, id);
-        this.oportunidades = oportunidades;
-        this.dato2 = dato2;
+    public Nino getNino() {
+        return nino;
     }
 
-    public byte getOportunidades() {
-        return oportunidades;
+    public void setNino(Nino nino) {
+        this.nino = nino;
     }
 
-    public void setOportunidades(byte oportunidades) {
-        this.oportunidades = oportunidades;
+    public int getOportunidad() {
+        return oportunidad;
     }
 
-    public Nino getDato2() {
-        return dato2;
+    public void setOportunidad(int oportunidad) {
+        this.oportunidad = oportunidad;
     }
 
-    public void setDato2(Nino dato2) {
-        this.dato2 = dato2;
-    }
-
-    @Override
-    public String toString() {
-        return "NinoOportunidad{" + "oportunidades=" + oportunidades + ", dato2=" + dato2 + '}';
-    }
-
-   
 }

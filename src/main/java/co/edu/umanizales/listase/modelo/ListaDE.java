@@ -29,7 +29,7 @@ public class ListaDE {
             NodoDE temp = cabeza;
             int cont = 1;
             while (temp.getSiguiente() != null) {
-                temp = temp.getSiguiente().getSiguiente();
+                temp = temp.getSiguiente();
                 cont++;
             }
             return cont;
@@ -41,16 +41,17 @@ public class ListaDE {
 
     public void adicionarNodoDE(Perro dato) {
         if (cabeza != null) {
-            cabeza = new NodoDE(dato);
-            
-        } else {
             NodoDE temp = cabeza;
-           while (temp.getSiguiente().getAnterior() != null) {
-                temp = temp.getSiguiente().getAnterior();
-           }
-           
-           temp.setSiguiente(new NodoDE(dato));
-           temp.setAnterior(new NodoDE(dato));
+            while (temp.getSiguiente() != null) {
+                temp = temp.getSiguiente();
+            }
+            //Estoy en el ultimo
+            //amarro perro nuevo ->
+            temp.setSiguiente(new NodoDE(dato));
+            temp.getSiguiente().setAnterior(temp);
+        } //si no hay datos agrego a cabeza ->
+        else {
+            cabeza = new NodoDE(dato);
         }
     }
 
@@ -97,14 +98,16 @@ public class ListaDE {
                 cabeza = cabeza.getSiguiente();
                 if (cabeza != null) {
                     cabeza.setAnterior(null);
-                } else {
-                    temp.getAnterior().setSiguiente(temp.getSiguiente());
-                    if (temp.getSiguiente() != null) {
-                        temp.getSiguiente().setAnterior(temp.getAnterior());
-                    }
+                }
+            } else {
+                temp.getAnterior().setSiguiente(temp.getSiguiente());
+                if (temp.getSiguiente() != null) {
+                    temp.getSiguiente().setAnterior(temp.getAnterior());
+
                 }
             }
         }
+
     }
 
     public void invertirDE() {
@@ -114,7 +117,6 @@ public class ListaDE {
             while (temp != null) {
                 listaTemporal.adicionarAlInicioDE(temp.getDato());
                 temp = temp.getSiguiente();
-                temp = temp.getAnterior();
             }
             cabeza = listaTemporal.getCabeza();
         }
@@ -123,8 +125,8 @@ public class ListaDE {
     public void intercambiarExtremosDE() {
         if (cabeza != null) {
             NodoDE temp = cabeza;
-            while (temp.getSiguiente() != null && temp.getAnterior() != null) {
-                temp = temp.getAnterior().getSiguiente();
+            while (temp.getSiguiente() != null) {
+                temp = temp.getSiguiente();
 
             }
             Perro perrotemp = cabeza.getDato();
@@ -133,12 +135,20 @@ public class ListaDE {
         }
     }
 
+    public void mostrarLista() {
+        NodoDE recorrer = cabeza;
+        while (recorrer != null) {
+            System.out.println("(" + recorrer.getDato() + ")");
+            recorrer = recorrer.getSiguiente();
+        }
+    }
+
     public Perro encontrarxPosicionDE(int posicion) {
         if (cabeza != null) {
             NodoDE temp = cabeza;
             int cont = 1;
             while (posicion != cont) {
-                temp = temp.getSiguiente().getAnterior();
+                temp = temp.getSiguiente();
                 cont++;
             }
             return temp.getDato();
@@ -169,6 +179,78 @@ public class ListaDE {
             }
         } else {
             System.out.println("No hay dato para eliminar");
+        }
+    }
+
+    public void adicionarNodoPorPosicion(int posicionIngreso, Perro dato) {
+        if (cabeza != null) {
+            int cont = 1;
+            if (posicionIngreso == cont) {
+                adicionarAlInicioDE(dato);
+            } else {
+                NodoDE temp = cabeza;
+                while (cont != posicionIngreso - 1 && temp.getSiguiente() != null) {
+                    temp = temp.getSiguiente();
+                    cont++;
+                }
+                if (temp.getSiguiente() == null) {
+
+                    adicionarNodoDE(dato);
+                } else {
+                    NodoDE temp1 = temp.getSiguiente();
+                    temp.setSiguiente(new NodoDE(dato));
+                    temp.getSiguiente().setSiguiente(temp1);
+                    temp1.setAnterior(temp.getSiguiente());
+                    temp.getSiguiente().setAnterior(temp);
+                }
+            }
+        } else {
+            adicionarNodoDE(dato);
+        }
+
+    }
+
+    public void intercambiarPosiciones(int perroUno, int perroDos) {
+        if (cabeza != null) {
+            Perro temporalUno = encontrarxPosicionDE(perroUno);
+            Perro temporalDos = encontrarxPosicionDE(perroDos);
+            NodoDE temp = cabeza;
+            int cont = 1;
+            if (perroUno < perroDos) {
+                while (temp.getSiguiente() != null && cont != perroUno) {
+                    cont++;
+                    temp = temp.getSiguiente();
+                }
+                if (cont == perroUno) {
+                    temp.setDato(temporalDos);
+                }
+                cont = 1;
+                temp = cabeza;
+                while (temp.getSiguiente() != null && cont != perroDos) {
+                    cont++;
+                    temp = temp.getSiguiente();
+                }
+                if (cont == perroDos) {
+                    temp.setDato(temporalUno);
+                }
+            } else if (perroUno > perroDos) {
+                while (temp.getSiguiente() != null && cont != perroDos) {
+                    cont++;
+                    temp = temp.getSiguiente();
+                }
+                if (cont == perroDos) {
+                    temp.setDato(temporalUno);
+                }
+                cont = 1;
+                temp = cabeza;
+                while (temp.getSiguiente() != null && cont != perroUno) {
+                    cont++;
+                    temp = temp.getSiguiente();
+                }
+                if (cont == perroUno) {
+                    temp.setDato(temporalDos);
+                }
+            }
         }
     }
 }
